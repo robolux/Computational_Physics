@@ -13,29 +13,29 @@ def f_function(x):
 
 def general(f_function, a, b, c, n):
 
-    # solve Using Gaussian Jordan Elimination (RREF)
-    x = nmp.linspace(0, 1, n+2)
-    h = x[1] - x[0]
-    s = f_function(x)*h**2
-    v = nmp.zeros(n+2)
+    # solve Using Gaussian Jordan Elimination (rref)
+    x = nmp.linspace(0, 1, n+2) # set x range with points between
+    h = x[1] - x[0]             # find height
+    s = f_function(x)*h**2      # find s
+    v = nmp.zeros(n+2)          # preallocation for speed
 
     # forward substitution
     for m in range(1, n+2):
-        rf   =  a[m]/b[m-1] # row factor
-        b[m] -= c[m-1]*rf
-        s[m] -= s[m-1]*rf
+        rf   =  a[m]/b[m-1]     # row factor
+        b[m] -= c[m-1]*rf       # gauss magic
+        s[m] -= s[m-1]*rf       # take it to the front now
 
     # backward substitution
-    v[n+1] = s[n+1] / b[n+1]
+    v[n+1] = s[n+1] / b[n+1]    # time to back it up
 
     for m in range(n, -1, -1):
         v[m] = (s[m] - c[m]*v[m+1]) / b[m]
 
-    return x,v
+    return x,v                  # lets make sure the variables don't get lost forever
 
 def tridiag(f_function, a, b, c, n):
 
-    # solve Using tri diagonal method special case
+    # solve using tri diagonal method special case
     x = nmp.linspace(0, 1, n+2)
     h = x[1] - x[0]
     s = f_function(x)*h**2
@@ -68,6 +68,8 @@ def LU(f_function, a, b, c, n):
 
 
     lu, pivot = scp.lu_factor(A, overwrite_a=True, check_finite=False)
+    # I would be interested in the future to try a no-pivot, partial-pivot, and full-pivot
+    # lu decomp scheme to compare how it optimizes for this case.
 
     x = nmp.linspace(0, 1, n+2)
     h = x[1]-x[0]
@@ -77,6 +79,6 @@ def LU(f_function, a, b, c, n):
     v_i = scp.lu_solve((lu, pivot), s, overwrite_b=True)
 
     v = nmp.zeros(n+2)
-    v[1:-1] = v_i[:]
+    v[1:-1] = v_i[:] # strip non-important data
 
     return x, v

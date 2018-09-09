@@ -11,14 +11,16 @@ from solver import u_function
 save_path = '../results/plots'
 n_values = ['10', '100', '1000', '10000', '100000', '1000000']
 n_values_lu = ['10', '100', '1000', '10000']
+
+# pretty plots make the world go round
 rainbow = ['#FC2847', '#FF8243', '#FFCF48', '#B2EC5D', '#1CD3A2', '#1DACD6']
 rainbow2 = ['#FC2847', '#FF8243', '#FFCF48', '#B2EC5D', '#1CD3A2', '#1DACD6']
 rainbow3 = ['#FC2847', '#FF8243', '#FFCF48', '#B2EC5D', '#1CD3A2', '#1DACD6']
 
 # get part b solution plots
-for g, rainbow in zip(n_values, rainbow):
-        b_x, b_v = part_b(int(g), -1, 2, -1)
-        plt.plot(b_x, b_v, color = rainbow, label = str(g))
+for g, rainbow in zip(n_values, rainbow):                       # enumerate across the two lists
+        b_x, b_v = part_b(int(g), -1, 2, -1)                    # pass the test case to function
+        plt.plot(b_x, b_v, color = rainbow, label = str(g))     # plot with legend / color
 
 # get exact solution
 n_exact = 1000000
@@ -32,8 +34,8 @@ plt.ylabel('u(x)')
 plt.xlabel('x')
 plt.title('Approximation to u by General Algorithm')
 filename = os.path.join(save_path,"general.png")
-plt.savefig(filename)
-plt.clf()
+plt.savefig(filename)   # save figure to .png in ../results/plots
+plt.clf()               # clear figure to prepare for next algo plot
 
 # get part c solution plots
 for g, rainbow2 in zip(n_values, rainbow2):

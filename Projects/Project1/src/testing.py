@@ -12,10 +12,10 @@ save_path = '../results'
 for w, g in enumerate(['10', '100', '1000', '10000', '100000', '1000000'], 1):
     filename = os.path.join(save_path, "general_" + str(g) + ".txt")
     print(filename)
-    with open (filename, 'w') as f_m:
+    with open (filename, 'w') as f_m:           # with auto closes files which is helpful here
         b_x, b_v = part_b(int(g), -1, 2, -1)
-        s_b_x = ', '.join(str(h) for h in b_x)
-        f_m.write(s_b_x)
+        s_b_x = ', '.join(str(h) for h in b_x)  # convert arrays to a string for output
+        f_m.write(s_b_x)                        # write to a file the data
         f_m.write("\n\n")
         s_b_v = ', '.join(str(h) for h in b_v)
         f_m.write(s_b_v)
