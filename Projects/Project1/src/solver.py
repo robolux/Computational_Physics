@@ -21,12 +21,12 @@ def general(f_function, a, b, c, n):
 
     # forward substitution
     for m in range(1, n+2):
-        rf   = (a[m])/(b[m-1]) # row factor
+        rf   =  a[m]/b[m-1] # row factor
         b[m] -= c[m-1]*rf
         s[m] -= s[m-1]*rf
 
     # backward substitution
-    v[n+1] = (s[n+1])/(b[n+1])
+    v[n+1] = s[n+1] / b[n+1]
 
     for m in range(n, -1, -1):
         v[m] = (s[m] - c[m]*v[m+1]) / b[m]
