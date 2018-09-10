@@ -66,10 +66,13 @@ def benchmarking(n, a_i, b_i, c_i):
     b = b_i
     c = c_i
 
-    start_time = time.time()
-    x, v = LU(f_function, a, b, c, n)
-    end_time = time.time()
-    LU_time = end_time - start_time
+    LU_time = 0. # preallocation
+
+    if (n <= 10000):
+        start_time = time.time()
+        x, v = LU(f_function, a, b, c, n)
+        end_time = time.time()
+        LU_time = end_time - start_time
 
     return general_time, tridiag_time, LU_time
 

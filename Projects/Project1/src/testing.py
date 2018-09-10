@@ -55,7 +55,7 @@ for w, g in enumerate(['10', '100', '1000', '10000'], 1):
         f_m.write(s_e_v)
 
 # benchmarking
-for w, g in enumerate(['10', '100', '1000', '10000'], 1):
+for w, g in enumerate(['10', '100', '1000', '10000', '100000', '1000000'], 1):
     filename = os.path.join(save_path, "bench_" + str(g) + ".txt")
     print(filename)
     with open (filename, 'w') as f_m:
