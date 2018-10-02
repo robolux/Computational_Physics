@@ -1,3 +1,7 @@
 
 Projects/Project1/prompt/tasks.rtf
 *.pyc
+Projects/Project1/results/bench_10.txt
+Projects/Project1/results/bench_100.txt
+Projects/Project1/results/bench_1000.txt
+Projects/Project1/results/bench_10000.txt
