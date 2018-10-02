@@ -1,0 +1,17 @@
+
+
+****************
+Part D
+****************
+
+Solution for Part D with n = 4, omega = 1, and rho max = 128 took 0.000102043 seconds
+Reached specified tolerance of (1E-10) in 5 iterations
+This translates to 0.31 iterations/element
+
+Part D Sol    numpy .eig    numpy .eigh
+*****************************************
+1310.7230517  1310.7230517  1310.7230517
+5242.8830517  5242.8830517  5242.8830517
+11796.483051  11796.483051  11796.483051
+20971.523051  20971.523051  20971.523051
+The Unit Tests have PASSED

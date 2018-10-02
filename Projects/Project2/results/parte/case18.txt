@@ -1,0 +1,18 @@
+
+
+****************
+Part E
+****************
+
+Solution for Part E with n = 4, omega = 0, and rho max = 6 took 0.000329018 seconds
+Reached specified tolerance of (1E-10) in 17 iterations
+This translates to 1.06 iterations/element
+
+Part E Sol w2   numpy .eig      numpy .eigh
+********************************************
+2.0896210671    2.0896210671    2.0896210671
+3.4445786165    3.4445786165    3.4445786165
+5.0093850312    5.0093850312    5.0093850312
+7.5480819519    7.5480819519    7.5480819519
+The Unit Tests have PASSED
+
