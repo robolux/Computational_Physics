@@ -253,7 +253,7 @@ if __name__ == "__main__":
             f_m.write(str(elapsed_time_e))
 
     else:
-
+        
         pathobj = "../results/perihelion.txt"
         with open (pathobj, 'r') as f_m:
             blob = f_m.read().splitlines()
@@ -273,18 +273,16 @@ if __name__ == "__main__":
         plt.plot(time_newton, angles_newton*radians_to_arcseconds, '-')
         plt.plot(time_einstein, angles_einstein*radians_to_arcseconds, '-')
 
-        plt.title("Change in perihelion angle over a century\n$\Delta t$ = %g" % dt)
-        plt.legend(["Classical Mechanics case", "Relativistic case"], loc="best")
-        plt.xlabel("time in years")
-        plt.ylabel("angle in seconds of arc")
+        plt.title("Change in Perihelion Angle over a Century\n$\Delta t$ = %g" % dt)
+        plt.legend(["Classical Mechanics Case", "Relativistic Case"], loc="best")
+        plt.xlabel("Time (years)")
+        plt.ylabel("Angle (seconds of arc)")
         plt.tight_layout()
         plt.show()
 
-        precession_newton = angles_newton[-1]*100/time_newton[-1]
-        precession_newton *= radians_to_arcseconds
-        precession_einstein = angles_einstein[-1]*100/time_einstein[-1]
-        precession_einstein *= radians_to_arcseconds
-        print("Precession per 100 years (Newton):   %g" % (precession_newton))
-        print("Precession per 100 years (Einstein): %g" % (precession_einstein))
+        precession_newton = angles_newton*radians_to_arcseconds
+        precession_einstein = angles_einstein*radians_to_arcseconds
+        print("Precession per 100 years (Newton):   %g" % (precession_newton[-1]))
+        print("Precession per 100 years (Einstein): %g" % (precession_einstein[-1]))
         print("Observed perihelions (Newton):   %d" % len(angles_newton))
         print("Observed perihelions (Einstein): %d" % len(angles_einstein))
