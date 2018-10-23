@@ -9,13 +9,19 @@ import numpy as nmp
 from solver import solar_system
 import matplotlib.pyplot as plt
 import numpy as np
+import warnings
 from operator import itemgetter
 import math
 
+# suppress matplotlib axis version error
+# going to be corrected in next mpl release according to stackexchange
+warnings.filterwarnings("ignore", module="matplotlib") # suppress it
+
+# constants
 G = 4*nmp.pi**2
 
 if __name__ == "__main__":
-    '''
+
     # the earth-sun system
     solar_system_a = solar_system()
     solar_system_a.create_planetary_object(0,0, 0,0, 1) #Sun
@@ -48,6 +54,35 @@ if __name__ == "__main__":
     plt.ylabel("AU")
     plt.savefig("../results/velocity_verlet.png", dpi = 1200)
     plt.clf()
+    
+
+    # time step tests
+    time_solar_system = solar_system()
+    time_solar_system.create_planetary_object(0, 0, 0, 0, 1)
+    time_solar_system.create_planetary_object(1, 0, 0, 6.281989, 3.003e-6)
+
+    euler_200 = time_solar_system.fill_sol(250, 1, integrator=time_solar_system.forward_euler)[0]
+    ver_200 = time_solar_system.fill_sol(250, 1)[0]
+    euler_50 = time_solar_system.fill_sol(50, 1, integrator=time_solar_system.forward_euler)[0]
+    ver_50 = time_solar_system.fill_sol(50, 1)[0]
+    euler_25 = time_solar_system.fill_sol(25, 1, integrator=time_solar_system.forward_euler)[0]
+    ver_25 = time_solar_system.fill_sol(25, 1)[0]
+    plt.axes(aspect = 'equal')
+    plt.plot(euler_200[:,1,0], euler_200[:,1,1], "-", color = '#00cccc')
+    plt.plot(euler_50[:,1,0],  euler_50[:,1,1],  "-", color = '#69a6ea')
+    plt.plot(euler_25[:,1,0],  euler_25[:,1,1],  "-", color = '#736ace')
+    plt.plot(ver_200[:,1,0],   ver_200[:,1,1],   "-", color = '#30c441')
+    plt.plot(ver_50[:,1,0],    ver_50[:,1,1],    "-", color = '#000000')
+    plt.plot(ver_25[:,1,0],    ver_25[:,1,1],    "-", color = '#956815')
+    plt.plot(0,0,"o", color = "#FDB813")
+    plt.axis([-7,1.5,-1.5,2])
+    plt.xlabel("AU")
+    plt.ylabel("AU")
+    plt.title("Differing Timesteps with Velocity Verlet\nand Forward Euler Integrators")
+    plt.legend(["dt=1/250 year, FE","dt=1/50   year, FE", "dt=1/25   year, FE","dt=1/250 year, VV","dt=1/50   year, VV","dt=1/25   year, VV"], loc='upper left')
+    plt.savefig("../results/time_step.png", dpi = 1200)
+    plt.clf()
+
 
     # energy conservation
     solar_system_Energy = solar_system()
@@ -72,8 +107,7 @@ if __name__ == "__main__":
     plt.xlabel("Time (years)")
     plt.ylabel(r"Energy ($SolarMasses*\frac{{AU}^{2}}{{Year}^{2}}$)")
     plt.legend(["Kinetic Energy","Potential Energy","Total Energy"])
-    plt.tight_layout()
-    plt.show()
+    plt.savefig("../results/energy.png", dpi = 1200)
     plt.clf()
 
     print("Center of mass at beginning of simulation, and after 10 years:")
@@ -86,8 +120,8 @@ if __name__ == "__main__":
     plt.ylabel("Angular Momentum (L)")
     print("Relative error in angular momentum over 10 years: %e" % (( nmp.min(AngularMomentum) - nmp.max(AngularMomentum) ) / nmp.min(AngularMomentum)))
     plt.axis([0,10,0,4e-5])
-    plt.tight_layout()
-    plt.show()
+    plt.savefig("../results/angular_momentum.png", dpi = 1200)
+    plt.clf()
 
 
     # escape velocity
@@ -135,7 +169,6 @@ if __name__ == "__main__":
 
         p, v = solar_system_c.fill_sol(int(1e4), 25)
 
-        plt.axes(aspect='equal')
         plt.plot(p[:,0,0], p[:,0,1], "y-")
         plt.plot(p[:,1,0], p[:,1,1], "b-")
         plt.plot(p[:,2,0], p[:,2,1], "r-")
@@ -146,10 +179,13 @@ if __name__ == "__main__":
         plt.plot(p[0,1,0], p[0,1,1], "bx")
         plt.plot(p[-1,1,0], p[-1,1,1], "bo")
         if g == '1':
+            plt.axis('equal')
             plt.axis([-10,10,-10,10])
         elif g == '10':
+            plt.axis('equal')
             plt.axis([-10,10,-10,10])
         elif g == '1000':
+            plt.axis('equal')
             plt.axis([-10,30,-5,50])
         plt.xlabel("AU")
         plt.ylabel("AU")
@@ -177,16 +213,16 @@ if __name__ == "__main__":
 
     p, v = solar_system.fill_sol(int(1e4), 250, integrator = solar_system.velocity_verlet, acc_method = solar_system.Acc)
 
-    plt.axes(aspect='equal')
     for i in range(len(masses)+1):
         plt.plot(p[:,i,0], p[:,i,1])
     plt.axis([-40,60,-35,35])
+
     plt.title("Solar System Simulated over 250 years")
     plt.legend(bodies, loc='best')
     plt.savefig("../results/complete_solar_system.png", dpi = 1200)
     plt.clf()
 
-    '''
+
     # perihelion precession of Mercury
     def find_perihelion_alt(minima_x, minima_y):
         # div = nmp.divide(minima_y, minima_x)
@@ -253,7 +289,7 @@ if __name__ == "__main__":
             f_m.write(str(elapsed_time_e))
 
     else:
-        
+
         pathobj = "../results/perihelion.txt"
         with open (pathobj, 'r') as f_m:
             blob = f_m.read().splitlines()
@@ -277,8 +313,8 @@ if __name__ == "__main__":
         plt.legend(["Classical Mechanics Case", "Relativistic Case"], loc="best")
         plt.xlabel("Time (years)")
         plt.ylabel("Angle (seconds of arc)")
-        plt.tight_layout()
-        plt.show()
+        plt.savefig("../results/perihelion_angle.png", dpi = 1200)
+        plt.clf()
 
         precession_newton = angles_newton*radians_to_arcseconds
         precession_einstein = angles_einstein*radians_to_arcseconds
