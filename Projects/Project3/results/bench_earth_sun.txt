@@ -1,0 +1,26 @@
+Benchmarking the Earth-Sun System with varying dt and solvers
+
+Forward Euler with dt = 0.1
+Computational Time: 0.023478
+
+Velocity Verlet with dt = 0.1
+Computational Time: 0.052323
+
+Forward Euler with dt = 0.01
+Computational Time: 0.223417
+
+Velocity Verlet with dt = 0.01
+Computational Time: 0.474764
+
+Forward Euler with dt = 0.001
+Computational Time: 2.289643
+
+Velocity Verlet with dt = 0.001
+Computational Time: 4.652022
+
+Forward Euler with dt = 0.0001
+Computational Time: 22.421817
+
+Velocity Verlet with dt = 0.0001
+Computational Time: 46.441356
+

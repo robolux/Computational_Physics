@@ -54,7 +54,7 @@ if __name__ == "__main__":
     plt.ylabel("AU")
     plt.savefig("../results/velocity_verlet.png", dpi = 1200)
     plt.clf()
-    
+
 
     # time step tests
     time_solar_system = solar_system()
@@ -82,6 +82,37 @@ if __name__ == "__main__":
     plt.legend(["dt=1/250 year, FE","dt=1/50   year, FE", "dt=1/25   year, FE","dt=1/250 year, VV","dt=1/50   year, VV","dt=1/25   year, VV"], loc='upper left')
     plt.savefig("../results/time_step.png", dpi = 1200)
     plt.clf()
+    
+    # benchmarking forward euler vs velocity verlet with the earth-sun System
+    solar_system_bench = solar_system()
+    solar_system_bench.create_planetary_object(0,0, 0,0, 1)                 # Sun
+    solar_system_bench.create_planetary_object(1,0, 0,2*nmp.pi, 3.003e-6)   # Earth
+
+    pathobj = "../results/bench_earth_sun.txt"
+    with open (pathobj, 'w') as f_m:
+        f_m.write("Benchmarking the Earth-Sun System with varying dt and solvers\n\n")
+
+    for w, g in enumerate(['1e3', '1e4', '1e5', '1e6'], 1):
+        for w2, g2 in enumerate(['Forward Euler', 'Velocity Verlet']):
+
+            dt_1 = 100.0/float(g)
+
+            if g2 == 'Forward Euler':
+                pre = time.clock()
+                p, v = solar_system_bench.fill_sol(int(float(g)), 100,integrator=solar_system_bench.forward_euler)
+                post = time.clock()
+                b_time = post - pre
+
+            if g2 == 'Velocity Verlet':
+                pre = time.clock()
+                p, v = solar_system_bench.fill_sol(int(float(g)), 100,integrator=solar_system_bench.velocity_verlet)
+                post = time.clock()
+                b_time = post - pre
+
+            pathobj = "../results/bench_earth_sun.txt"
+            with open (pathobj, 'a') as f_m:
+                f_m.write(g2 + " with dt = " + str(dt_1))
+                f_m.write("\nComputational Time: " + str(b_time) + "\n\n")
 
 
     # energy conservation
