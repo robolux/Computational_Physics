@@ -16,6 +16,7 @@ c = 63197.8
 class solar_system:
     def __init__(self):
         self.n_planets = 0
+        self.distance = 0
 
     def create_planetary_object(self, x0, y0, vx0, vy0, mass, adjust_sun=True):
         if self.n_planets == 0:
@@ -42,14 +43,12 @@ class solar_system:
     def Acc(self, Positions, Velocity, target, Masses ):
         x_acc = 0
         y_acc = 0
-        global distance
-        global x_distance
-        global y_distance
         for i in xrange(self.n_planets):
             if i != target:
                 x_distance = Positions[target,0] - Positions[i,0]
                 y_distance = Positions[target,1] - Positions[i,1]
                 distance = math.sqrt( x_distance**2 + y_distance**2 )
+                self.distance = distance
                 x_acc -= G*Masses[i]*x_distance/distance**3
                 y_acc -= G*Masses[i]*y_distance/distance**3
         return nmp.array([x_acc, y_acc])
@@ -71,13 +70,13 @@ class solar_system:
     def acc_rel(self, Positions, Velocity, target, Masses):
         x_acc = 0
         y_acc = 0
-        global distance
         for i in xrange(self.n_planets):
             if i != target:
 
                 x_distance = Positions[target,0] - Positions[i,0]
                 y_distance = Positions[target,1] - Positions[i,1]
                 distance = math.sqrt( x_distance**2 + y_distance**2 )
+                self.distance = distance
 
                 l = Positions[target,0]*Velocity[1] \
                     - Positions[target,1]*Velocity[0]
@@ -155,7 +154,7 @@ class solar_system:
             integrator(p[i], v[i], p[i+1], v[i+1], dt, acc_method)
             prev_prev = prev
             prev = curr
-            curr = distance
+            curr = self.distance
 
             if ((prev_prev > prev) & (prev < curr)):
                 print(p[i][1][0]) # this is x

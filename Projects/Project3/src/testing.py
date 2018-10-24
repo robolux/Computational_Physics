@@ -82,7 +82,7 @@ if __name__ == "__main__":
     plt.legend(["dt=1/250 year, FE","dt=1/50   year, FE", "dt=1/25   year, FE","dt=1/250 year, VV","dt=1/50   year, VV","dt=1/25   year, VV"], loc='upper left')
     plt.savefig("../results/time_step.png", dpi = 1200)
     plt.clf()
-    
+
     # benchmarking forward euler vs velocity verlet with the earth-sun System
     solar_system_bench = solar_system()
     solar_system_bench.create_planetary_object(0,0, 0,0, 1)                 # Sun
@@ -225,13 +225,14 @@ if __name__ == "__main__":
         plt.savefig("../results/three_body_" + str(g) + ".png", dpi = 1200)
         plt.clf()
 
+    # all planets in solar system
     masses = { 'mercury' : 0.166e-6, 'venus' : 2.081e-6, 'earth' : 3.003e-6, 'mars' : 0.323e-6, 'jupiter' : 954.7e-6, 'saturn' : 285.8e-6, 'uranus' : 43.6e-6, 'neptune' : 51.5e-6}
     distances = { 'mercury' : 0.39, 'venus' : 0.72, 'earth' : 1, 'mars' : 1.52, 'jupiter' : 5.20, 'saturn' : 9.58, 'uranus' : 19.23, 'neptune' : 30.10}
     speeds_kms = { 'mercury' : 47.4, 'venus' : 35.0, 'earth' : 29.8, 'mars' : 24.1, 'jupiter' : 13.1, 'saturn' : 9.7, 'uranus' : 6.8, 'neptune' : 5.4}
     speeds = {key: speeds_kms[key]*0.210805 for key in speeds_kms}
 
-    solar_system = solar_system()
-    solar_system.create_planetary_object(0, 0, 0, 0, 1)
+    solar_system_all = solar_system()
+    solar_system_all.create_planetary_object(0, 0, 0, 0, 1)
     bodies = ['sun']
 
     # sort planets after distance
@@ -239,10 +240,10 @@ if __name__ == "__main__":
     sort_obj = [item[0] for item in sorted(body_dist, key=itemgetter(1))]
 
     for key in sort_obj:
-        solar_system.create_planetary_object(distances[key], 0, 0, speeds[key], masses[key])
+        solar_system_all.create_planetary_object(distances[key], 0, 0, speeds[key], masses[key])
         bodies.append(key)
 
-    p, v = solar_system.fill_sol(int(1e4), 250, integrator = solar_system.velocity_verlet, acc_method = solar_system.Acc)
+    p, v = solar_system_all.fill_sol(int(1e4), 250, integrator = solar_system_all.velocity_verlet, acc_method = solar_system_all.Acc)
 
     for i in range(len(masses)+1):
         plt.plot(p[:,i,0], p[:,i,1])
