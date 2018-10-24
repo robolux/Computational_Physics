@@ -187,7 +187,7 @@ if __name__ == "__main__":
     plt.xlabel("AU")
     plt.ylabel("AU")
     plt.plot(p[:,0,0], p[:,0,1], "yo")
-    plt.legend(["Planet1, v = $\sqrt{4}$$\pi$","Planet2, v = $\sqrt{5}$$\pi$","Planet3, v = $\sqrt{6}$$\pi$", "Planet4, v = $\sqrt{7}$$\pi$", "Planet5, v = $\sqrt{8}$$\pi$", "Planet6, v = $\sqrt{9}$$\pi$","Sun"])
+    plt.legend(["Planet1, v = $\sqrt{4}$$\pi$","Planet2, v = $\sqrt{5}$$\pi$","Planet3, v = $\sqrt{6}$$\pi$", "Planet4, v = $\sqrt{7}$$\pi$", "Planet5, v = $\sqrt{8}$$\pi$", "Planet6, v = $\sqrt{9}$$\pi$","Sun"], loc = "lower left")
     plt.savefig("../results/escape_vel_beta.png", dpi = 1200)
     plt.clf()
 
