@@ -308,16 +308,16 @@ def part_e(): # Writes data for L=40,60,80,100 over temp steps of 0.05 in the in
         MCc = 1E4
         L_ = nmp.array([40,60,80,100])
         for L in L_:
-            file_name = save_path + '/part_d__L_%s'%(str(L))
+            file_name = save_path + '/part_e__L_%s.txt'%(str(L))
             ins = nmp.array([L,T_i,T_f,Tn,MCc])
             test = ising_model(inscript = ins)
             test.solve(store_values=True,filename=file_name)
             del test
 
-    data  = nmp.genfromtxt(save_path + '/part_d__L_40.txt')
-    data2 = nmp.genfromtxt(save_path + '/part_d__L_60.txt')
-    data3 = nmp.genfromtxt(save_path + '/part_d__L_80.txt')
-    data4 = nmp.genfromtxt(save_path + '/part_d__L_100.txt')
+    data  = nmp.genfromtxt(save_path + '/part_e__L_40.txt')
+    data2 = nmp.genfromtxt(save_path + '/part_e__L_60.txt')
+    data3 = nmp.genfromtxt(save_path + '/part_e__L_80.txt')
+    data4 = nmp.genfromtxt(save_path + '/part_e__L_100.txt')
 
     T = data[:,-1]
 
@@ -388,10 +388,10 @@ def part_e(): # Writes data for L=40,60,80,100 over temp steps of 0.05 in the in
 
 # Find Tc
 def part_f():
-    data  = nmp.genfromtxt(save_path + '/part_d__L_40.txt')
-    data2 = nmp.genfromtxt(save_path + '/part_d__L_60.txt')
-    data3 = nmp.genfromtxt(save_path + '/part_d__L_80.txt')
-    data4 = nmp.genfromtxt(save_path + '/part_d__L_100.txt')
+    data  = nmp.genfromtxt(save_path + '/part_e__L_40.txt')
+    data2 = nmp.genfromtxt(save_path + '/part_e__L_60.txt')
+    data3 = nmp.genfromtxt(save_path + '/part_e__L_80.txt')
+    data4 = nmp.genfromtxt(save_path + '/part_e__L_100.txt')
 
     T = data[:,-1]
 
