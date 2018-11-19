@@ -423,10 +423,11 @@ def part_f():
     Tc_L_lim /= float(len(L))
     print('Tc = ' + str(Tc_L_lim))
 
-# Run All of the Project Parts
-# part_b()
-# part_c_T_1()
-# part_c_T_2()
-# part_d()
-# part_e()
-part_f()
+if __name__ == "__main__":
+    # Run All of the Project Parts
+    # part_b()
+    # part_c_T_1()
+    # part_c_T_2()
+    # part_d()
+    # part_e()
+    # part_f()
