@@ -22,7 +22,7 @@ def part_b():
     Tn = 1
 
     if run_txt_production_b == True:
-        for w, g in enumerate(['2e5'], 1):  # reduced this to 2e5, but didn't change looping
+        for w, g in enumerate(['1e3', '1e4', '1e5', '2e5', '1e6'], 1):  # reduced this to 2e5, but didn't change looping
                                             # for future expandibility
 
             file_name = save_path + '/part_b__L_2__mc__' + g + '.txt'
@@ -266,35 +266,35 @@ def part_d():
 
     ss = 2500 # When approximately steady state occurs
 
-    E_count1 = nmp.array(E_count1[ss:])
+    E_count1 = nmp.array(E_count1[ss:])/400.
     plt.hist(E_count1,weights=nmp.ones_like(E_count1)/float(len(E_count1)),bins=25)
     plt.ylabel('$\mathrm{PDF}$',size=15)
     plt.xlabel('$E,\,[\mathrm{J}]$',size=15)
-    print nmp.sqrt(E_var1)  # E_var is given per spin, so in order to find variance, sqrt(400)/400 = 1/20
+    print nmp.sqrt(E_var1)/20.  # E_var is given per spin, so in order to find variance, sqrt(400)/400 = 1/20
     plt.savefig(save_path + '/part_d_T1_random.png', dpi = 1200)
     plt.clf()
 
-    E_count2 = nmp.array(E_count2[ss:])
+    E_count2 = nmp.array(E_count2[ss:])/400.
     plt.hist(E_count2,weights=nmp.ones_like(E_count2)/float(len(E_count2)),bins=25)
     plt.ylabel('$\mathrm{PDF}$',size=15)
     plt.xlabel('$E,\,[\mathrm{J}]$',size=15)
-    print nmp.sqrt(E_var2)  # E_var is given per spin, so in order to find variance, sqrt(400)/400 = 1/20
+    print nmp.sqrt(E_var2)/20.  # E_var is given per spin, so in order to find variance, sqrt(400)/400 = 1/20
     plt.savefig(save_path + '/part_d_T2_random.png', dpi = 1200)
     plt.clf()
 
-    E_count3 = nmp.array(E_count3[ss:])
+    E_count3 = nmp.array(E_count3[ss:])/400.
     plt.hist(E_count3,weights=nmp.ones_like(E_count3)/float(len(E_count3)),bins=25)
     plt.ylabel('$\mathrm{PDF}$',size=15)
     plt.xlabel('$E,\,[\mathrm{J}]$',size=15)
-    print nmp.sqrt(E_var3)  # E_var is given per spin, so in order to find variance, sqrt(400)/400 = 1/20
+    print nmp.sqrt(E_var3)/20.  # E_var is given per spin, so in order to find variance, sqrt(400)/400 = 1/20
     plt.savefig(save_path + '/part_d_T1_ord.png', dpi = 1200)
     plt.clf()
 
-    E_count4 = nmp.array(E_count4[ss:])
+    E_count4 = nmp.array(E_count4[ss:])/400.
     plt.hist(E_count4,weights=nmp.ones_like(E_count4)/float(len(E_count4)),bins=25)
     plt.ylabel('$\mathrm{PDF}$',size=15)
     plt.xlabel('$E,\,[\mathrm{J}]$',size=15)
-    print nmp.sqrt(E_var4)  # E_var is given per spin, so in order to find variance, sqrt(400)/400 = 1/20
+    print nmp.sqrt(E_var4)/20.  # E_var is given per spin, so in order to find variance, sqrt(400)/400 = 1/20
     plt.savefig(save_path + '/part_d_T2_ord.png', dpi = 1200)
     plt.clf()
 
@@ -417,17 +417,17 @@ def part_f():
         ind = nmp.argmax(Cv[i,o:]) + o
         a += L[i]*(Mbar[i,ind]**(1./beta))
     a /= float(len(L))
-    print a
 
     Tc_L_lim = 0.
     for i in range(len(L)):
         Tc_L_lim += Tc[i] - a/L[i]
     Tc_L_lim /= float(len(L))
-    print Tc_L_lim
+    print('Tc = ' + str(Tc_L_lim))
 
+# Run All of the Project Parts
 # part_b()
 # part_c_T_1()
 # part_c_T_2()
 # part_d()
-part_e()
-part_f()
+# part_e()
+# part_f()

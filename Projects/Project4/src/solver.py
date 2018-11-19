@@ -171,6 +171,8 @@ class ising_model:
         self.E_var = E_var
         self.Mabsbar = M_bar_abs
         self.ebar = E_bar
+
+        # DEFAULT OUTPUTS
         # with open (filename, 'a') as f_m:
         #     f_m.write('%10.11f' % E_bar)
         #     f_m.write(' ')
@@ -187,17 +189,34 @@ class ising_model:
         #     f_m.write('%10.11f' % (self.accepted/L_tot))
         #     f_m.write('\n')
 
-        # FOR PART E COMMENT ABOVE AND UNCOMMENT THIS
+        # FOR PART B
         with open (filename, 'a') as f_m:
             f_m.write('%10.11f' % E_bar)
             f_m.write(' ')
-            f_m.write('%10.11f' % M_bar_abs)
-            f_m.write(' ')
             f_m.write('%10.11f' % Cv)
+            f_m.write(' ')
+            f_m.write('%10.11f' % M_bar_abs)
             f_m.write(' ')
             f_m.write('%10.11f' % Chi)
             f_m.write(' ')
             f_m.write('%10.11f' % T)
+            f_m.write(' ')
+            f_m.write('%10.11f' % Mc)
+            f_m.write(' ')
+            f_m.write('%10.11f' % (self.accepted/L_tot))
             f_m.write('\n')
+
+        # FOR PART E
+        # with open (filename, 'a') as f_m:
+        #     f_m.write('%10.11f' % E_bar)
+        #     f_m.write(' ')
+        #     f_m.write('%10.11f' % M_bar_abs)
+        #     f_m.write(' ')
+        #     f_m.write('%10.11f' % Cv)
+        #     f_m.write(' ')
+        #     f_m.write('%10.11f' % Chi)
+        #     f_m.write(' ')
+        #     f_m.write('%10.11f' % T)
+        #     f_m.write('\n')
 
         return None
