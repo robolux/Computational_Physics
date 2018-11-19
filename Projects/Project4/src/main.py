@@ -1,4 +1,4 @@
-# Project 2 Main - Computational Physics
+# Project 4 Main - Computational Physics
 # Hunter Phillips
 
 from __future__ import print_function
