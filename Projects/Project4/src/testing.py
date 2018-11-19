@@ -22,8 +22,7 @@ def part_b():
     Tn = 1
 
     if run_txt_production_b == True:
-        for w, g in enumerate(['1e3', '1e4', '1e5', '2e5', '1e6'], 1):  # reduced this to 2e5, but didn't change looping
-                                            # for future expandibility
+        for w, g in enumerate(['1e3', '1e4', '1e5', '2e5', '1e6'], 1):
 
             file_name = save_path + '/part_b__L_2__mc__' + g + '.txt'
             with open (file_name, 'w') as f_m:
@@ -417,7 +416,7 @@ def part_f():
         ind = nmp.argmax(Cv[i,o:]) + o
         a += L[i]*(Mbar[i,ind]**(1./beta))
     a /= float(len(L))
-
+    print(a)
     Tc_L_lim = 0.
     for i in range(len(L)):
         Tc_L_lim += Tc[i] - a/L[i]
@@ -430,4 +429,4 @@ def part_f():
 # part_c_T_2()
 # part_d()
 # part_e()
-# part_f()
+part_f()

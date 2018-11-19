@@ -45,7 +45,6 @@ class ising_model:
                 self.E -= spin_mat[i,j]*(spin_mat[i+1,j]+spin_mat[i,j+1])
                 self.M += spin_mat[i,j]
         self.spin_mat = spin_mat
-        return None
 
     def energy(self):
 
@@ -54,7 +53,6 @@ class ising_model:
             for j in xrange(1,int(self.L)+1):
                 E_st -= self.spin_mat[i,j]*(self.spin_mat[i+1,j]+self.spin_mat[i,j+1])
         self.E_count.append(E_st)
-        return None
 
     def flip(self,i,j):
 
@@ -71,7 +69,6 @@ class ising_model:
         elif j == 1:
             self.spin_mat[i,L+1] = self.spin_mat[i,j]
 
-        return None
 
     def metropolis(self,w):
 
@@ -91,7 +88,6 @@ class ising_model:
                     self.E += dE_t
                     self.M += 2.*self.spin_mat[i,j]
                     self.accepted += 1
-        return None
 
     def solve(self,random_i=True,store_values=False,filename='noname',when_save=1):
 
@@ -173,31 +169,14 @@ class ising_model:
         self.ebar = E_bar
 
         # DEFAULT OUTPUTS
-        # with open (filename, 'a') as f_m:
-        #     f_m.write('%10.11f' % E_bar)
-        #     f_m.write(' ')
-        #     f_m.write('%10.11f' % E_var)
-        #     f_m.write(' ')
-        #     f_m.write('%10.11f' % M_bar_abs)
-        #     f_m.write(' ')
-        #     f_m.write('%10.11f' % M_abs_var)
-        #     f_m.write(' ')
-        #     f_m.write('%10.11f' % T)
-        #     f_m.write(' ')
-        #     f_m.write('%10.11f' % Mc)
-        #     f_m.write(' ')
-        #     f_m.write('%10.11f' % (self.accepted/L_tot))
-        #     f_m.write('\n')
-
-        # FOR PART B
         with open (filename, 'a') as f_m:
             f_m.write('%10.11f' % E_bar)
             f_m.write(' ')
-            f_m.write('%10.11f' % Cv)
+            f_m.write('%10.11f' % E_var)
             f_m.write(' ')
             f_m.write('%10.11f' % M_bar_abs)
             f_m.write(' ')
-            f_m.write('%10.11f' % Chi)
+            f_m.write('%10.11f' % M_abs_var)
             f_m.write(' ')
             f_m.write('%10.11f' % T)
             f_m.write(' ')
@@ -205,6 +184,23 @@ class ising_model:
             f_m.write(' ')
             f_m.write('%10.11f' % (self.accepted/L_tot))
             f_m.write('\n')
+
+        # FOR PART B
+        # with open (filename, 'a') as f_m:
+        #     f_m.write('%10.11f' % E_bar)
+        #     f_m.write(' ')
+        #     f_m.write('%10.11f' % Cv)
+        #     f_m.write(' ')
+        #     f_m.write('%10.11f' % M_bar_abs)
+        #     f_m.write(' ')
+        #     f_m.write('%10.11f' % Chi)
+        #     f_m.write(' ')
+        #     f_m.write('%10.11f' % T)
+        #     f_m.write(' ')
+        #     f_m.write('%10.11f' % Mc)
+        #     f_m.write(' ')
+        #     f_m.write('%10.11f' % (self.accepted/L_tot))
+        #     f_m.write('\n')
 
         # FOR PART E
         # with open (filename, 'a') as f_m:
@@ -218,5 +214,3 @@ class ising_model:
         #     f_m.write(' ')
         #     f_m.write('%10.11f' % T)
         #     f_m.write('\n')
-
-        return None
