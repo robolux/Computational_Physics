@@ -99,7 +99,7 @@ def wrapper(m_init, N, tran_count, sim_count, lambdaa, alpha, gamma):
     start = rolex.time()
 
     for i in range(0, sim_count):
-
+        print('progress' + str(i))
         agents.fill(m_init)
         agents = trading(N, tran_count, agents, lambdaa, alpha, gamma)
         totagents += nmp.sort(agents)
