@@ -23,7 +23,7 @@ def unit_tests_1():
 
                     print(file_name)
 
-                    m_init       =  float(1000)
+                    m_init       =  float(1)
                     N            =  int(unit_N)
                     tran_count   =  int(1e4)
                     sim_count    =  int(1e3)
@@ -53,10 +53,10 @@ def unit_tests_2():
 
                     print(file_name)
 
-                    m_init       =  float(1000)
+                    m_init       =  float(1)
                     N            =  int(unit_N)
-                    tran_count   =  int(1e2)
-                    sim_count    =  int(1e2)
+                    tran_count   =  int(1e4)
+                    sim_count    =  int(1e3)
                     lambdaa      =  float(unit_lambda)
                     alpha        =  float(unit_alpha)
                     gamma        =  float(unit_gamma)
@@ -83,10 +83,10 @@ def unit_tests_3():
 
                     print(file_name)
 
-                    m_init       =  float(1000)
+                    m_init       =  float(1)
                     N            =  int(unit_N)
-                    tran_count   =  int(1e2)
-                    sim_count    =  int(1e2)
+                    tran_count   =  int(1e4)
+                    sim_count    =  int(1e3)
                     lambdaa      =  float(unit_lambda)
                     alpha        =  float(unit_alpha)
                     gamma        =  float(unit_gamma)
@@ -99,5 +99,5 @@ def unit_tests_3():
                         f_m.write('Computational Time: ' + str(tot_time))
 
 # unit_tests_1()
-# unit_tests_2()
-unit_tests_3()
+unit_tests_2()
+# unit_tests_3()
