@@ -100,7 +100,6 @@ plt.loglog(x,P,'b')
 
 sz = 0.5
 selection_1=int(max(plot4_1)/sz)
-print(selection_1)
 dh4, edge = np.histogram(plot4_1,bins=selection_1)
 cen = 0.5*(edge[1:]+edge[:-1])
 delta_b = cen[1]-cen[0]
