@@ -1,1 +1,1 @@
-Computational Time: 355.815932035
+Computational Time: 342.571375132
