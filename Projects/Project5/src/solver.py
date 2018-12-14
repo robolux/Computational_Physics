@@ -75,7 +75,7 @@ def trading(N, transaction_count, agents, lambdaa, alpha, gamma):
             testcond1 = nmp.absolute(avg_tempo_old - avg_tempo) / nmp.absolute(avg_tempo_old)
             testcond2 = nmp.absolute(tempo_block - tempo_block_old) / nmp.absolute(tempo_block_old)
 
-            if ((testcond1.any() < 0.2) & (testcond2.any() < 0.5)):
+            if ((testcond1.any() < 0.2686) & (testcond2.any() < 0.4791)):
 
                 break
 
@@ -85,7 +85,7 @@ def trading(N, transaction_count, agents, lambdaa, alpha, gamma):
                 tempo_block_old = tempo_block
 
             cum_1  = 0
-            cum_2 = 0
+            cum_2  = 0
 
     return agents
 
@@ -99,7 +99,7 @@ def wrapper(m_init, N, tran_count, sim_count, lambdaa, alpha, gamma):
     start = rolex.time()
 
     for i in range(0, sim_count):
-        print('progress ' + str(i))
+        print('progress: ' + str(i))
         agents.fill(m_init)
         agents = trading(N, tran_count, agents, lambdaa, alpha, gamma)
         totagents += nmp.sort(agents)
